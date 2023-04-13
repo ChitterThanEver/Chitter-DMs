@@ -30,9 +30,7 @@ describe UserRepository do
       user = repo.find_handle(1)
 
       expect(user.handle).to eq('Bob')
-    end
 
-    it "finds the handle based on id" do
       repo = UserRepository.new
       user = repo.find_handle(4)
 

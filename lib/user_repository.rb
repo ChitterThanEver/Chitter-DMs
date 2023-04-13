@@ -54,8 +54,7 @@ class UserRepository
     user = User.new
     user.id = record['id'].to_i
     user.handle = record['handle']
-    user.verified = record['verified']
-    user.verified = user.verified.eql?('t') ? true : false
+    user.verified = record['verified'].eql?('t') ? true : false
     return user
   end
   
