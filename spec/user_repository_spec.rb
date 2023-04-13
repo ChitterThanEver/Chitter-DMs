@@ -41,8 +41,19 @@ describe UserRepository do
   end
 
   context "#find_blocked" do
+    it "returns an array of blocked users based on user_id" do
+      repo = UserRepository.new
+      blocked_list = repo.find_blocked(7)
 
+      expect(blocked_list.length).to eq(1)
+      expect(blocked_list[0].handle).to eq("Bob")
+    end
 
+    it "returns an array of blocked users based on user_id" do
+      repo = UserRepository.new
+      blocked_list = repo.find_blocked(6)
 
-
+      expect(blocked_list.length).to eq(0)
+    end
+  end
 end

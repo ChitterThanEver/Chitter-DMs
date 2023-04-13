@@ -1,3 +1,3 @@
 class User 
-  attr_accessor :handle, :verified
+  attr_accessor :handle, :verified, :id
 end

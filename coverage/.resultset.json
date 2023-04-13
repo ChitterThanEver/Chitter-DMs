@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/spec/dm_repository_spec.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/spec/dm_repository_spec.rb": {
         "lines": [
           1,
           1,
@@ -32,7 +32,7 @@
           null
         ]
       },
-      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/lib/dm_repository.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/lib/dm_repository.rb": {
         "lines": [
           1,
           null,
@@ -65,19 +65,14 @@
           null
         ]
       },
-      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/lib/dm.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/lib/dm.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/spec/integration/app_spec.rb": {
-        "lines": [
-
-        ]
-      }
-      "/Users/jonpillay/Desktop/MakersCode/Chitter-DMs/spec/integration/app_spec.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/spec/integration/app_spec.rb": {
         "lines": [
           1,
           1,
@@ -122,7 +117,7 @@
           null
         ]
       },
-      "/Users/jonpillay/Desktop/MakersCode/Chitter-DMs/app.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/app.rb": {
         "lines": [
           1,
           1,
@@ -158,6 +153,11 @@
           0,
           0,
           null,
+          null,
+          null,
+          1,
+          0,
+          0,
           null,
           null,
           1,
@@ -167,18 +167,19 @@
           null
         ]
       },
-      "/Users/jonpillay/Desktop/MakersCode/Chitter-DMs/lib/user_repository.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/lib/user_repository.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
+          1,
           null,
-          0,
+          8,
+          1,
           null,
           null,
           1,
@@ -190,36 +191,119 @@
           1,
           null,
           null,
-          1,
-          0,
-          0,
-          0,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           1,
-          0,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          2,
+          2,
+          null,
+          2,
+          null,
+          3,
+          2,
           null,
           null,
           1,
           null,
           1,
-          0,
-          0,
-          0,
-          0,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
           null,
           null,
           null
         ]
       },
-      "/Users/jonpillay/Desktop/MakersCode/Chitter-DMs/lib/user.rb": {
+      "/Users/pablo/projects/makers/Chitter-DMs/lib/user.rb": {
         "lines": [
           1,
           1,
           null
         ]
+      },
+      "/Users/pablo/projects/makers/Chitter-DMs/spec/user_repository_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          5,
+          5,
+          5,
+          null,
+          null,
+          1,
+          1,
+          5,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1681393507
+    "timestamp": 1681404158
   }
 }
