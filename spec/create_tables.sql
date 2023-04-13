@@ -4,7 +4,7 @@ CREATE TABLE users (
   verified boolean
 );
 
-CREATE TABLE DMs (
+CREATE TABLE dms (
   id SERIAL PRIMARY KEY,
   message_contents VARCHAR(500) NOT NULL,
   message_time TIMESTAMP default current_timestamp,
@@ -14,8 +14,8 @@ CREATE TABLE DMs (
 
 CREATE TABLE blocked (
   id SERIAL PRIMARY KEY,
-  sender_id int,
-  recipient_id int,
-  CONSTRAINT fk_sender_id foreign key(sender_id) references users(id) on delete cascade,
-  CONSTRAINT fk_recipient_id foreign key(recipient_id) references users(id) on delete cascade
+  blocker_id int,
+  blocked_id int,
+  CONSTRAINT fk_blocker_id foreign key(blocker_id) references users(id) on delete cascade,
+  CONSTRAINT fk_blocked_id foreign key(blocked_id) references users(id) on delete cascade
 );

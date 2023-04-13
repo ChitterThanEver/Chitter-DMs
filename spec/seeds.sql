@@ -1,4 +1,4 @@
-TRUNCATE TABLE users, DMs, blocked RESTART IDENTITY;
+TRUNCATE TABLE users, dms, blocked RESTART IDENTITY;
 
 INSERT INTO users 
     (user_handle, verified)
