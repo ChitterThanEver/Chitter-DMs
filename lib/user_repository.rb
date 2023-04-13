@@ -9,6 +9,15 @@ class UserRepository
     
     results.each{ |record| users << user_builder(record)}
   end
+
+  def list_handles
+    sql = 'SELECT handle FROM users;'
+    results = DatabaseConnection.exec_params(sql, [])
+
+    handles = []
+    results.each{ |record| handles << record['handle'] }
+    return handles
+  end
   
   def updated_verified(user)
     sql = 'UPDATE users SET verified = $1 WHERE id = $2;'
