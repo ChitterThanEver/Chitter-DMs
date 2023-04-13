@@ -16,8 +16,23 @@ class UserRepository
     DatabaseConnection.exec_params(sql, sql_params) 
   end
 
+  def find_handle(id)
+    sql = 'SELECT handle FROM users WHERE id = $1;'
+    params = [id]
+    results = DatabaseConnection.exec_params(sql, params)
+    result[0]['handle']
+  end
+  
   def find_blocked(id)
-    sql = 'SELECT users.handle AS blocker_id, '
+    sql = 'SELECT blocked.blocked_id FROM users
+    JOIN blocked ON users.id = blocked.blocker_id
+    WHERE blocked.blocker_id = $1;'
+    params = [id]
+    results = DatabaseConnection.exec_params(sql, [])
+    
+    block_list = []
+
+    results.each { |record| block_list << find_handle(record['blocked_id']) }
   end
 
   private 
