@@ -1,7 +1,7 @@
 TRUNCATE TABLE users, dms, blocked RESTART IDENTITY;
 
 INSERT INTO users 
-    (user_handle, verified)
+    (handle, verified)
   VALUES
     ('Bob', false),
     ('Sam', true),
@@ -12,7 +12,7 @@ INSERT INTO users
     ('Lucy', false);
 
 INSERT INTO dms
-    (message_contents, recipient_handle, sender_handle, message_time)
+    (contents, recipient_handle, sender_handle, time)
   VALUES
     ('Hello Bob', 'Bob', 'Sam', '2023-04-13 12:33:29'),
     ('Whats up?', 'Sam', 'Bob', '2023-04-13 12:35:41'),
@@ -24,6 +24,6 @@ INSERT INTO dms
     ('Go away!', 'Lucy', 'Bob', '2023-04-13 17:29:59');
 
 INSERT INTO blocked
-    (sender_id, recipient_id)
+    (blocked_id, blocker_id)
   VALUES
     (1, 7);

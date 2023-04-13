@@ -1,7 +1,83 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/spec/dm_repository_spec.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/lib/dm_repository.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          2,
+          2,
+          null,
+          2,
+          null,
+          2,
+          3,
+          null,
+          null,
+          2,
+          null,
+          null,
+          1,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/lib/dm.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/samwhite/Desktop/web-applications/Chitter-DMs/spec/integration/app_spec.rb": {
+        "lines": [
+
+        ]
+      }
     },
-    "timestamp": 1681319699
+    "timestamp": 1681393507
   }
 }
