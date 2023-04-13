@@ -10,11 +10,11 @@ class UserRepository
     results.each{ |record| users << user_builder(record)}
   end
   
-  def updated_verified(user)
-    sql = 'UPDATE users SET verified = $1 WHERE id = $2;'
-    sql_params = [user.verified, user.id]
-    DatabaseConnection.exec_params(sql, sql_params) 
-  end
+  # def updated_verified(user)
+  #   sql = 'UPDATE users SET verified = $1 WHERE id = $2;'
+  #   sql_params = [user.verified, user.id]
+  #   DatabaseConnection.exec_params(sql, sql_params) 
+  # end
 
   def find_handle(id)
     sql = 'SELECT handle FROM users WHERE id = $1;'

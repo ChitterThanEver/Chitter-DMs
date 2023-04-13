@@ -2,7 +2,7 @@ require 'user_repository'
 
 def reset_users_table
   seed_sql = File.read('spec/seeds.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'database_test' })
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter-dms-test' })
   connection.exec(seed_sql)
 end
 
@@ -17,9 +17,6 @@ describe UserRepository do
       users = repo.all
 
       expect(users.length).to eq(7)
-      expect(users[-1].handle).to eq(7)
-
-      #####
       expect(users[-1].handle).to eq('Lucy')
       expect(users[-1].verified).to eq(false)
       expect(users[0].handle).to eq('Bob')
