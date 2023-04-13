@@ -1,15 +1,15 @@
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  user_handle VARCHAR(30) NOT NULL UNIQUE,
+  handle VARCHAR(30) NOT NULL UNIQUE,
   verified boolean
 );
 
 CREATE TABLE dms (
   id SERIAL PRIMARY KEY,
-  message_contents VARCHAR(500) NOT NULL,
-  message_time TIMESTAMP default current_timestamp,
-  sender_handle VARCHAR(30) NOT NULL REFERENCES users(user_handle),
-  recipient_handle VARCHAR(30) NOT NULL REFERENCES users(user_handle)
+  contents VARCHAR(500) NOT NULL,
+  time TIMESTAMP default current_timestamp,
+  sender_handle VARCHAR(30) NOT NULL REFERENCES users(handle),
+  recipient_handle VARCHAR(30) NOT NULL REFERENCES users(handle)
 );
 
 CREATE TABLE blocked (
