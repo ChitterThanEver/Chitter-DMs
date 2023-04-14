@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative './lib/user_repository'
+require_relative './lib/dm_repository'
 require 'sinatra/flash'
 require_relative './lib/database_connection'
 
@@ -40,7 +41,11 @@ class Application < Sinatra::Base
   end
 
   get '/' do
+    @dm_repo = DMRepository.new
     @user_repo = UserRepository.new
+    if session[:handle]
+      @inbox = @dm_repo.find_inbox(session[:handle])
+    end
     return erb(:index)
   end
 end

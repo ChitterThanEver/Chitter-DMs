@@ -23,5 +23,21 @@
         </div>
       <% end %>
     </header>
+    <% if @inbox %>
+    <% @inbox.reverse_each do |dm| %>
+      <li>
+      <div style="margin: auto; width: 50%; border: 3px solid green; padding:3px;">
+        <div style="display: grid; grid-template-rows: 15% 80%;">
+        <div style="margin-top:-13px;">
+         
+        </div>
+        <div style="padding-top:5px;">
+          <h3><%= dm.contents %></h3>
+        </div>
+        </div>
+      </li>
+      <br>
+    <% end %>
+    <% end %>
   </body>
 </html>
