@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative './lib/user_repository'
+require_relative './lib/dm_repository'
 require 'sinatra/flash'
 require_relative './lib/database_connection'
 
@@ -18,9 +19,7 @@ class Application < Sinatra::Base
 
   def check_handle_exists(handle)
     user_repo = UserRepository.new
-    if user_repo.list_handles.include?(handle)
-      return true
-    end
+    return user_repo.list_handles.include?(handle)
   end
 
   post '/login' do
@@ -40,7 +39,10 @@ class Application < Sinatra::Base
   end
 
   get '/' do
-    @user_repo = UserRepository.new
+    @dm_repo = DMRepository.new
+    if session[:handle]
+      @inbox = @dm_repo.find_inbox(session[:handle])
+    end
     return erb(:index)
   end
 
