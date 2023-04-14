@@ -27,3 +27,4 @@ INSERT INTO blocked
     (blocked_id, blocker_id)
   VALUES
     (1, 7);
+    (2, 7);
