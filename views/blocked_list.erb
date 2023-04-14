@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <body>
+    <title>Here is your User list</title>
+    <form method="POST" action="/blocked_list">
+    <% @all.each do |user| %>
+      <% if @blocked.include?(user.handle)%>
+        <input type ="checkbox" name="blocked[]" value=<%=user.handle%> checked><%= user.handle%><br>
+      <% else %>
+        <input type ="checkbox" name="blocked[]" value=<%=user.handle%>><%= user.handle%><br>
+      <% end %>
+    <% end %>
+
+    <input type="submit" value="submit">
+    </form>
+    </body>
+</html>

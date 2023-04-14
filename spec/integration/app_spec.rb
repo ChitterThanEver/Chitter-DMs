@@ -66,4 +66,58 @@ describe Application do
       expect(response.body).to include "<h3>Hello Bob</h3>"
     end
   end
+
+  context "get /blocked_list" do
+    it "shows a list of users and their blocked status" do
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include '<h2>You are not logged in<h2>'
+
+      response = post("/login", handle: 'Lucy')
+      expect(response.status).to eq 302
+
+      response = get('/blocked_list')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Bob checked>Bob<br>')
+      expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Sam checked>Sam<br>')
+      expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Lucy>Lucy<br>')
+    end
+  end
+
+    context "post /blocked_list" do
+      it "updates a user blocked list" do
+        response = get("/")
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h2>You are not logged in<h2>'
+  
+        response = post("/login", handle: 'Lucy')
+        expect(response.status).to eq 302
+
+        response = get('/blocked_list')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Bob checked>Bob<br>')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Sam checked>Sam<br>')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Lucy>Lucy<br>')
+
+        # Now Lucy will uncheck Bob
+
+        post('/blocked_list', blocked: ['Sam'])
+        expect(response.status). to eq(200)
+
+        response = get('/blocked_list')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Bob>Bob<br>')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Sam checked>Sam<br>')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Irene>Irene<br>')
+        
+        # Now Lucy will uncheck Sam and check Irene
+        post('/blocked_list', blocked: ['Irene'])
+        expect(response.status). to eq(200)
+
+        response = get('/blocked_list')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Bob>Bob<br>')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Sam>Sam<br>')
+        expect(response.body).to include('<input type ="checkbox" name="blocked[]" value=Irene checked>Irene<br>')
+      end
+  end
 end
