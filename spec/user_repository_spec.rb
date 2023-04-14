@@ -69,7 +69,7 @@ describe UserRepository do
   context 'add_to_blocked_list' do
     it 'adds a user to the blocked list' do
       repo = UserRepository.new
-      repo.add_to_blocked_list('1', '3')
+      repo.add_to_blocked_list(1, 3)
       blocked_list = repo.find_blocked(1)
 
       expect(blocked_list.length).to eq(1)
