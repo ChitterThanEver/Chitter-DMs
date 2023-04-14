@@ -1,4 +1,4 @@
-require 'dm'
+require_relative './dm'
 
 class DMRepository
   def find_inbox(user_handle)
