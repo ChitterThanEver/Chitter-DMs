@@ -11,7 +11,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #fff;
-  background: #91c0d7;
+  background: #9dc7dc;
 }
 
 .container {
@@ -33,8 +33,12 @@ img {
 }
 
 nav {
-  background-color: #5186c2;
+  background-color: #55b1df;
   height: 80px;
+}
+
+.navbar {
+  height: 100%;
 }
 
 nav h1 {
@@ -47,11 +51,12 @@ nav p {
 
 header {
   background-color: #2a6db9;
+  padding-bottom: 20px;
 }
 
 header .container {
   align-items: flex-start;
-  padding-top: 35px;
+  padding-top: 20px;
 }
 
 a {
