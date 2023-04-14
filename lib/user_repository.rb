@@ -30,9 +30,8 @@ class UserRepository
     sql = 'SELECT handle FROM users WHERE id = $1;'
     params = [id]
     results = DatabaseConnection.exec_params(sql, params)
-    user = User.new
-    user.handle = results[0]['handle'] 
-    return user
+
+    return results[0]['handle'] 
   end
   
   def find_blocked(id)
@@ -64,6 +63,13 @@ class UserRepository
     return nil
   end
 
+  def get_user_by_handle(handle)
+    sql = 'SELECT * FROM users WHERE handle = $1'
+    result_set = DatabaseConnection.exec_params(sql, [handle])
+    user = user_builder(result_set.first)
+    return user
+  end
+
   private 
 
   def user_builder(record)
@@ -73,5 +79,4 @@ class UserRepository
     user.verified = record['verified'].eql?('t') ? true : false
     return user
   end
-  
 end

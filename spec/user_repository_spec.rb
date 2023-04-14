@@ -29,12 +29,12 @@ describe UserRepository do
       repo = UserRepository.new
       user = repo.find_handle(1)
 
-      expect(user.handle).to eq('Bob')
+      expect(user).to eq('Bob')
 
       repo = UserRepository.new
       user = repo.find_handle(4)
 
-      expect(user.handle).to eq('Mary')
+      expect(user).to eq('Mary')
     end
   end
 
@@ -44,7 +44,7 @@ describe UserRepository do
       blocked_list = repo.find_blocked(7)
 
       expect(blocked_list.length).to eq(2)
-      expect(blocked_list[0].handle).to eq("Bob")
+      expect(blocked_list[0]).to eq("Bob")
     end
 
     it "returns an array of blocked users based on user_id" do
@@ -62,18 +62,24 @@ describe UserRepository do
       blocked_list = repo.find_blocked(7)
 
       expect(blocked_list.length).to eq(1)
-      expect(blocked_list.first.handle).to include('Sam')
+      expect(blocked_list.first).to include('Sam')
     end
   end
 
   context 'add_to_blocked_list' do
     it 'adds a user to the blocked list' do
       repo = UserRepository.new
-      repo.add_to_blocked_list('1', '3')
+      repo.add_to_blocked_list(1, 3)
       blocked_list = repo.find_blocked(1)
 
       expect(blocked_list.length).to eq(1)
-      expect(blocked_list.first.handle).to include('Irene')
+      expect(blocked_list.first).to include('Irene')
     end
+  end
+
+  it "gets user by handle" do
+    repo = UserRepository.new
+    user = repo.get_user_by_handle('Bob')
+    expect(user.id).to eq 1
   end
 end

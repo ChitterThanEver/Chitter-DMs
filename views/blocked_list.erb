@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <body>
+    <title>Here is your User list</title>
+    <% @all.each do |user| %>
+      <div> <%=user.handle%> - Blocked? <%=@blocked.include?(user.handle) ? 'y' : 'n'%></div>
+    <% end %>
+    <form method="POST" action="/blocked_list">
+
+
+    </form>
+    </body>
+</html>

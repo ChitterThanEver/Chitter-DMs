@@ -39,9 +39,20 @@ describe Application do
     end
   end
 
-  it "gets user by handle" do
-    repo = UserRepository.new
-    user = repo.all.first
-    expect(app.get_user_by_handle('Bob')).to eq user
+  context "get /blocked_list" do
+    it "shows a list of users and their blocked status" do
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include '<h2>You are not logged in<h2>'
+
+      response = post("/login", handle: 'Lucy')
+      expect(response.status).to eq 302
+
+      response = get('/blocked_list')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<div> Bob - Blocked? y</div>')
+      expect(response.body).to include('<div> Sam - Blocked? y</div>')
+    end
   end
 end
