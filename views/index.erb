@@ -1,5 +1,7 @@
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+  </head>
   <body>
     <% flash.each do |type, message| %>
       <div data-alert class="flash <%= type %> alert-box radius">
@@ -11,15 +13,18 @@
       <div class="container">
         <h1>The Ugly Duckling Chitter DM App</h1>
         <div class="verified">
-          <img src="" alt="verified tick badge">
+        <% if 1 == 1 %>
+          <img src="verified-tick.png" alt="verified tick badge">
+          <p><a href="/auto-reply"></a>Auto Reply <%= session[:autoreply] %></p>
+        <% end %>
         </div>
       </div>
     </nav>
     <header>
-      
-      <h3>Please feed me some CSS</h3>
+    <div class="container">
+    <%# <h3>Please feed me some CSS</h3> %>
       <% if session[:handle] != nil %>
-        <h2>You are logged in as <%= session[:handle] %> Please Click <a href="/logout">HERE</a> to logout.<h2>
+        <h2>You are logged in as <%= session[:handle] %>. Please Click <a href="/logout">HERE</a> to logout.<h2>
       <% else %>
         <h2>You are not logged in<h2>
         <div>
@@ -30,6 +35,11 @@
         </form>
         </div>
       <% end %>
+    </div>
     </header>
+    <section>
+    <div class="container">
+    </div>
+    </section>
   </body>
 </html>
