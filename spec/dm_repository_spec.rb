@@ -17,7 +17,7 @@ RSpec.describe DMRepository do
 
     dms_bob = repo.find_inbox('Bob')
     dms_george = repo.find_inbox('George')
-    
+
     expect(dms_bob.length).to eq 1
     expect(dms_bob.first.contents).to eq 'Hello Bob'
 
