@@ -1,65 +1,64 @@
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="/styles.css" />
-  </head>
-  <body>
-    <% flash.each do |type, message| %>
-      <div data-alert class="flash <%= type %> alert-box radius">
-        <%= message %>
-        <a href="" class="close">&times;</a>
-      </div>
-    <% end %>
-    <nav>
-      <div class="container">
-        <h1>The Ugly Duckling Chitter DM App</h1>
-        <div class="verified">
-        <% if 1 == 1 %>
-          <img src="verified-tick.png" alt="verified tick badge">
-          <p><a href="/auto-reply">Auto Reply <%= session[:autoreply] %></a></p>
-        <% end %>
-          <p><a href="/logout">Log out</a></p>
-        </div>
-      </div>
-    </nav>
-    <header>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/styles.css" />
+</head>
+
+<body>
+  <% flash.each do |type, message| %>
+  <div data-alert class="flash <%= type %> alert-box radius">
+    <%= message %>
+    <a href="" class="close">&times;</a>
+  </div>
+  <% end %>
+  <nav>
     <div class="container">
-    <%# <h3>Please feed me some CSS</h3> %>
+      <h1>The Ugly Duckling Chitter DM App</h1>
+      <div class="verified">
+        <% if 1 == 1 %>
+        <img src="verified-tick.png" alt="verified tick badge">
+        <p><a href="/auto-reply">Auto Reply <%= session[:autoreply] %></a></p>
+        <% end %>
+        <p><a href="/logout">Log out</a></p>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="container">
+      <%# <h3>Please feed me some CSS</h3> %>
       <% if session[:handle] != nil %>
-        <h2>You are logged in as <%= session[:handle] %>.<h2>
-        <%# <h2>Please Click <a href="/logout">HERE</a> to logout.</h2> %>
-      <% else %>
-        <h2>You are not logged in<h2>
+      <h2>You are logged in as <%= session[:handle] %>.<h2>
+          <%# <h2>Please Click <a href="/logout">HERE</a> to logout.</h2> %>
+          <% else %>
+          <h2>You are not logged in<h2>
+              <div>
+                <h3>Log in Here!</h3>
+                <form action="/login" method="post">
+                  Username: <input type="text" name="handle">
+                  <input type="submit" value="Login">
+                </form>
+              </div>
+              <% end %>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <% if @inbox %>
+      <% @inbox.reverse_each do |dm| %>
+      <div class="box">
         <div>
-        <h3>Log in Here!</h3>
-        <form action="/login" method="post">
-          Username: <input type="text" name="handle">
-          <input type="submit" value="Login">
-        </form>
+          <% d=DateTime.parse(dm.time) %>
+          <h2><%=  dm.sender_handle %> DM'd you On <%= d.day %>/<%= d.month %>/<%= d.year %> At <%= d.strftime('%I:%M:%S %p') %></h2>
         </div>
+        <div style="padding-bottom:15px;">
+          <h3><%= dm.contents %></h3>
+        </div>
+      </div>
+      <% end %>
       <% end %>
     </div>
-    </header>
-    <section>
-    <div class="container">
-    <% if @inbox %>
-        <% @inbox.reverse_each do |dm| %>
-        <li>
-        <div style="margin: auto; width: 50%; border: 3px solid green; padding:3px;">
-            <div style="display: grid; grid-template-rows: 15% 80%;">
-                <div style="margin-top:-13px;">
-                <% d=DateTime.parse(dm.time) %>
-                    <h2><%=  dm.sender_handle %> DM'd you On <%= d.day %>/<%= d.month %>/<%= d.year %> At <%= d.strftime('%I:%M:%S %p') %></h2>
-                </div>
-                <div style="padding-top:5px;">
-                    <h3><%= dm.contents %></h3>
-                </div>
-            </div>
-        </li>
-        <br>
-        <% end %>
-    <% end %>
     </div>
-    </section>
-    
-  </body>
+  </section>
+</body>
+
 </html>
