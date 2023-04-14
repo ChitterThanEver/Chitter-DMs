@@ -8,6 +8,7 @@ class UserRepository
     users = []
     
     results.each{ |record| users << user_builder(record)}
+    return users
   end
 
   def list_handles
@@ -19,14 +20,32 @@ class UserRepository
     return handles
   end
   
-  def updated_verified(user)
-    sql = 'UPDATE users SET verified = $1 WHERE id = $2;'
-    sql_params = [user.verified, user.id]
-    DatabaseConnection.exec_params(sql, sql_params) 
-  end
+  # def updated_verified(user)
+  #   sql = 'UPDATE users SET verified = $1 WHERE id = $2;'
+  #   sql_params = [user.verified, user.id]
+  #   DatabaseConnection.exec_params(sql, sql_params) 
+  # end
 
+  def find_handle(id)
+    sql = 'SELECT handle FROM users WHERE id = $1;'
+    params = [id]
+    results = DatabaseConnection.exec_params(sql, params)
+    user = User.new
+    user.handle = results[0]['handle'] 
+    return user
+  end
+  
   def find_blocked(id)
-    sql = 'SELECT users.handle AS blocker_id, '
+    sql = 'SELECT blocked.blocked_id FROM users
+    JOIN blocked ON users.id = blocked.blocker_id
+    WHERE blocked.blocker_id = $1;'
+    params = [id]
+    results = DatabaseConnection.exec_params(sql, params)
+    
+    block_list = []
+
+    results.each { |record| block_list << find_handle(record['blocked_id']) }
+    return block_list
   end
 
   private 
@@ -35,7 +54,8 @@ class UserRepository
     user = User.new
     user.id = record['id'].to_i
     user.handle = record['handle']
-    user.verified = record['verified']
+    user.verified = record['verified'].eql?('t') ? true : false
+    return user
   end
   
 end
