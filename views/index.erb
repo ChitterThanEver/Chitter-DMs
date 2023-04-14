@@ -15,8 +15,9 @@
         <div class="verified">
         <% if 1 == 1 %>
           <img src="verified-tick.png" alt="verified tick badge">
-          <p><a href="/auto-reply"></a>Auto Reply <%= session[:autoreply] %></p>
+          <p><a href="/auto-reply">Auto Reply <%= session[:autoreply] %></a></p>
         <% end %>
+          <p><a href="/logout">Log out</a></p>
         </div>
       </div>
     </nav>
@@ -24,7 +25,8 @@
     <div class="container">
     <%# <h3>Please feed me some CSS</h3> %>
       <% if session[:handle] != nil %>
-        <h2>You are logged in as <%= session[:handle] %>. Please Click <a href="/logout">HERE</a> to logout.<h2>
+        <h2>You are logged in as <%= session[:handle] %>.<h2>
+        <%# <h2>Please Click <a href="/logout">HERE</a> to logout.</h2> %>
       <% else %>
         <h2>You are not logged in<h2>
         <div>
