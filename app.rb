@@ -19,9 +19,7 @@ class Application < Sinatra::Base
 
   def check_handle_exists(handle)
     user_repo = UserRepository.new
-    if user_repo.list_handles.include?(handle)
-      return true
-    end
+    return user_repo.list_handles.include?(handle)
   end
 
   post '/login' do
@@ -42,7 +40,6 @@ class Application < Sinatra::Base
 
   get '/' do
     @dm_repo = DMRepository.new
-    @user_repo = UserRepository.new
     if session[:handle]
       @inbox = @dm_repo.find_inbox(session[:handle])
     end
