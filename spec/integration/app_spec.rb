@@ -51,4 +51,24 @@ describe Application do
       expect(response.body).to include '<h2>You are not logged in<h2>'
     end
   end
+
+  context "get /send_message" do
+    it "returns the send message view" do
+      response = get('/send_message')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Send Message'
+      expect(response.body).to include 'Back to inbox'
+    end
+  end
+
+  context "post /send_message" do
+    it "returns 'Message sent'" do
+      response = post('/send_message')
+
+      expect(response.status).to eq 302
+      expect(response.body).to include 'Message Sent'
+      expect(response.body).to include 'Back to inbox'
+    end
+  end
 end

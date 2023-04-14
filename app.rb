@@ -45,4 +45,10 @@ class Application < Sinatra::Base
     end
     return erb(:index)
   end
+
+  get '/send_message' do
+    return erb(:send_message)
+  end
+
+  post '/'
 end

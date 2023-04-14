@@ -26,4 +26,14 @@ class DMRepository
     return dm
   end
 
+  def add(dm)
+    sql = "INSERT INTO dms
+    (contents, time, sender_handle, recipient_handle)
+    VALUES($1, $2, $3, $4);"
+    params = [dm.contents, dm.time, dm.sender_handle, dm.recipient_handle]
+
+    result_set = DatabaseConnection.exec_params(sql, params)
+
+  end
+
 end
