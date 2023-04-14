@@ -17,11 +17,6 @@ class Application < Sinatra::Base
     also_reload './lib/user_repository'
   end
 
-  def check_handle_exists(handle)
-    user_repo = UserRepository.new
-    return user_repo.list_handles.include?(handle)
-  end
-
   post '/login' do
     handle = params[:handle]
     if check_handle_exists(handle)
@@ -72,6 +67,10 @@ class Application < Sinatra::Base
   end
 
   helpers do
+    def check_handle_exists(handle)
+      user_repo = UserRepository.new
+      return user_repo.list_handles.include?(handle)
+    end
 
     def handle_to_id(handle)
       UserRepository.new.get_user_by_handle(handle).id
