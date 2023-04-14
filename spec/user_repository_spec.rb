@@ -43,7 +43,7 @@ describe UserRepository do
       repo = UserRepository.new
       blocked_list = repo.find_blocked(7)
 
-      expect(blocked_list.length).to eq(1)
+      expect(blocked_list.length).to eq(2)
       expect(blocked_list[0].handle).to eq("Bob")
     end
 
@@ -52,6 +52,28 @@ describe UserRepository do
       blocked_list = repo.find_blocked(6)
 
       expect(blocked_list.length).to eq(0)
+    end
+  end
+
+  context 'removed_from_blocked_list' do
+    it 'removes a user from the blocked list based on id' do
+      repo = UserRepository.new
+      repo.remove_from_blocked_list(7, 1)
+      blocked_list = repo.find_blocked(7)
+
+      expect(blocked_list.length).to eq(1)
+      expect(blocked_list.first.handle).to include('Sam')
+    end
+  end
+
+  context 'add_to_blocked_list' do
+    it 'adds a user to the blocked list' do
+      repo = UserRepository.new
+      repo.add_to_blocked_list(1, 3)
+      blocked_list = repo.find_blocked(1)
+
+      expect(blocked_list.length).to eq(1)
+      expect(blocked_list.first.handle).to include('Irene')
     end
   end
 end

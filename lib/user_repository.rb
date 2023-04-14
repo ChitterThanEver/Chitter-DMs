@@ -48,6 +48,22 @@ class UserRepository
     return block_list
   end
 
+  def remove_from_blocked_list(blocker_id, blocked_id)
+    sql = 'DELETE FROM blocked
+    WHERE blocker_id = $1 AND blocked_id = $2;'
+    sql_params = [blocker_id, blocked_id]
+    DatabaseConnection.exec_params(sql, sql_params)
+    return nil
+  end
+  
+  def add_to_blocked_list(blocker_id, blocked_id)
+    sql = 'INSERT INTO blocked (blocker_id, blocked_id)
+    VALUES ($1, $2);'
+    sql_params = [blocker_id, blocked_id]
+    DatabaseConnection.exec_params(sql, sql_params)
+    return nil
+  end
+
   private 
 
   def user_builder(record)
