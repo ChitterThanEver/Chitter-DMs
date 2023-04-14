@@ -38,4 +38,10 @@ describe Application do
       expect(response.body).to include '<h2>You are not logged in<h2>'
     end
   end
+
+  it "gets user by handle" do
+    repo = UserRepository.new
+    user = repo.all.first
+    expect(app.get_user_by_handle('Bob')).to eq user
+  end
 end

@@ -43,4 +43,15 @@ class Application < Sinatra::Base
     @user_repo = UserRepository.new
     return erb(:index)
   end
+
+  get '/blocked_list' do
+    repo = UserRepository.new
+    repo.find_blocked()
+  end
+
+  def get_user_by_handle(handle)
+    repo = UserRepository.new
+    users = repo.all
+    user = users.filter { |user| user.handle == handle}.first
+  end
 end
