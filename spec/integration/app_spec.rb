@@ -55,4 +55,26 @@ describe Application do
       expect(response.body).to include('<div> Sam - Blocked? y</div>')
     end
   end
+
+    context "post /blocked_list" do
+      it "updates a user blocked list" do
+        response = get("/")
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h2>You are not logged in<h2>'
+  
+        response = post("/login", handle: 'Lucy')
+        expect(response.status).to eq 302
+
+        response = get('/blocked_list')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<input type ="checkbox" checked/>Bob<br>')
+        expect(response.body).to include('<input type ="checkbox" checked/>Sam<br>')
+
+        # Now Lucy will uncheck Bob
+
+        response = post('/blocked_list', :blocked)
+        expect(response.body).to include('<input type ="checkbox"/>Bob<br>')
+        expect(response.body).to include('<input type ="checkbox" checked/>Sam<br>')
+    end
+  end
 end

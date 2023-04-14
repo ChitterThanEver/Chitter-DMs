@@ -52,6 +52,11 @@ class Application < Sinatra::Base
     return erb(:blocked_list)
   end
   
+  post '/blocked_list' do
+    blocked = params[:blocked]
+    blocked.inspect
+
+  end
   # def create_block_list_hash(users, blocked)
   #   hash = Hash.new
   #   users.each do |user|
