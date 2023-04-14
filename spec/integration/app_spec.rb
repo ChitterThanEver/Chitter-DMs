@@ -18,7 +18,7 @@ describe Application do
   end
 
   context "GET /" do
-    it "returns the homepage with list of DMs if user is logged in" do
+    it "returns the homepage with list of DMs if user is logged in with valid handle" do
       response = get("/")
       expect(response.status).to eq 200
       expect(response.body).to include '<h2>You are not logged in<h2>'
@@ -29,6 +29,19 @@ describe Application do
       response = get("/")
       expect(response.status).to eq 200
       expect(response.body).to include 'You are logged in'
+    end
+
+    it "returns homepage with flash message if user tries to log in with invalid handle" do
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include '<h2>You are not logged in<h2>'
+
+      response = post("/login", handle: 'Natasha')
+      expect(response.status).to eq 302
+
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Handle Does Not Exist'
     end
 
     it "returns homepage with log in form if user is not logged in" do
