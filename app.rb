@@ -54,8 +54,19 @@ class Application < Sinatra::Base
   post '/send_message' do
     @user_repo = UserRepository.new
     recipient_id = @user_repo.find_id(params[:recipient_handle])
-    sender_id = @user_repo.find_id(session[:handle])
-    if @user_repo.find_blocked(recipient_id).include? sender_id
+
+    blocked_users = @user_repo.find_blocked(recipient_id.to_i)
+
+    @blocked = false
+    blocked_users.each do |user|
+      if user.handle == session[:handle]
+        @blocked = true
+      else
+        next
+      end
+    end
+
+    if @blocked
       flash[:blocked] = "You are blocked by this user, message can't be sent"
       redirect '/send_message'
     else

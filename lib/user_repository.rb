@@ -32,7 +32,7 @@ class UserRepository
     results = DatabaseConnection.exec_params(sql, params)
     user = User.new
     user.id = results[0]['id']
-    return user
+    return user.id
   end
 
   def find_handle(id)

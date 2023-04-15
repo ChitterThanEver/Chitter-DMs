@@ -41,9 +41,9 @@ describe UserRepository do
   context "#find_id" do
     it "finds the id based on handle" do
       repo = UserRepository.new
-      user = repo.find_id("Bob")
+      user_id = repo.find_id("Bob")
 
-      expect(user.id).to eq("1")
+      expect(user_id).to eq("1")
     end
   end
 
