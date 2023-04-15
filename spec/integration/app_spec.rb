@@ -60,7 +60,7 @@ describe Application do
   end
 
   context "post /send_message" do
-    it "returns 'Message sent'" do
+    it "returns 'Message sent' when message sent successfully" do
       response = get("/")
       expect(response.status).to eq 200
       expect(response.body).to include "<h2>You are not logged in<h2>"
@@ -78,6 +78,26 @@ describe Application do
       response = get("/send_message")
       expect(response.status).to eq 200
       expect(response.body).to include "Message sent"
+    end
+
+    it "tells user they can't send a message to a user who has blocked them" do
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include "<h2>You are not logged in<h2>"
+
+      response = post("/login", handle: "Bob")
+      expect(response.status).to eq 302
+
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include "You are logged in"
+
+      response = post("/send_message", recipient_handle: "Lucy", contents: "Hello")
+      expect(response.status).to eq 302
+
+      response = get("/send_message")
+      expect(response.status).to eq 200
+      expect(response.body).to include "You are blocked by this user, message can't be sent"
     end
   end
 end

@@ -7,10 +7,10 @@ def reset_users_table
 end
 
 describe UserRepository do
-  before(:each) do 
+  before(:each) do
     reset_users_table
   end
-  
+
   context "#all" do
     it "returns all users" do
       repo = UserRepository.new
@@ -35,6 +35,15 @@ describe UserRepository do
       user = repo.find_handle(4)
 
       expect(user.handle).to eq('Mary')
+    end
+  end
+
+  context "#find_id" do
+    it "finds the id based on handle" do
+      repo = UserRepository.new
+      user = repo.find_id("Bob")
+
+      expect(user.id).to eq("1")
     end
   end
 

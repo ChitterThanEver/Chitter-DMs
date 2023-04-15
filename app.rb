@@ -15,6 +15,7 @@ class Application < Sinatra::Base
     register Sinatra::Flash
     enable :sessions
     also_reload './lib/user_repository'
+    also_reload './lib/dm_repository'
   end
 
   def check_handle_exists(handle)
@@ -51,14 +52,22 @@ class Application < Sinatra::Base
   end
 
   post '/send_message' do
-    new_dm = DM.new
-    new_dm.recipient_handle = params[:recipient_handle]
-    new_dm.contents = params[:contents]
-    new_dm.sender_handle = session[:handle]
+    @user_repo = UserRepository.new
+    recipient_id = @user_repo.find_id(params[:recipient_handle])
+    sender_id = @user_repo.find_id(session[:handle])
+    if @user_repo.find_blocked(recipient_id).include? sender_id
+      flash[:blocked] = "You are blocked by this user, message can't be sent"
+      redirect '/send_message'
+    else
+      new_dm = DM.new
+      new_dm.recipient_handle = params[:recipient_handle]
+      new_dm.contents = params[:contents]
+      new_dm.sender_handle = session[:handle]
 
-    @dm_repo = DMRepository.new
-    @dm_repo.add(new_dm)
-    flash[:message_sent] = "Message sent"
-    redirect '/send_message'
+      @dm_repo = DMRepository.new
+      @dm_repo.add(new_dm)
+      flash[:message_sent] = "Message sent"
+      redirect '/send_message'
+    end
   end
 end
