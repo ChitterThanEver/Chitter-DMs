@@ -50,5 +50,15 @@ class Application < Sinatra::Base
     return erb(:send_message)
   end
 
-  post '/'
+  post '/send_message' do
+    new_dm = DM.new
+    new_dm.recipient_handle = params[:recipient_handle]
+    new_dm.contents = params[:contents]
+    new_dm.sender_handle = session[:handle]
+
+    @dm_repo = DMRepository.new
+    @dm_repo.add(new_dm)
+    flash[:message_sent] = "Message sent"
+    redirect '/send_message'
+  end
 end
