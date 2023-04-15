@@ -31,7 +31,7 @@ class UserRepository
     params = [handle]
     results = DatabaseConnection.exec_params(sql, params)
     user = User.new
-    user.id = results[0]['id']
+    user.id = results[0]['id'].to_i
     return user.id
   end
 

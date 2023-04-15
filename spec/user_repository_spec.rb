@@ -43,7 +43,7 @@ describe UserRepository do
       repo = UserRepository.new
       user_id = repo.find_id("Bob")
 
-      expect(user_id).to eq("1")
+      expect(user_id).to eq(1)
     end
   end
 
