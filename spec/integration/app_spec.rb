@@ -99,5 +99,25 @@ describe Application do
       expect(response.status).to eq 200
       expect(response.body).to include "You are blocked by this user, message can't be sent"
     end
+
+    it "checks if recipient handle is valid" do
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include "<h2>You are not logged in<h2>"
+
+      response = post("/login", handle: "Bob")
+      expect(response.status).to eq 302
+
+      response = get("/")
+      expect(response.status).to eq 200
+      expect(response.body).to include "You are logged in"
+
+      response = post("/send_message", recipient_handle: "Natasha", contents: "Hello")
+      expect(response.status).to eq 302
+
+      response = get("/send_message")
+      expect(response.status).to eq 200
+      expect(response.body).to include "Handle Does Not Exist"
+    end
   end
 end

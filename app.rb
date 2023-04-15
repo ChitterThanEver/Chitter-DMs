@@ -52,24 +52,28 @@ class Application < Sinatra::Base
   end
 
   post '/send_message' do
-    @user_repo = UserRepository.new
-    recipient_id = @user_repo.find_id(params[:recipient_handle])
-
-    blocked_users = @user_repo.find_blocked(recipient_id.to_i)
-
     @blocked = false
-    blocked_users.each do |user|
-      if user.handle == session[:handle]
-        @blocked = true
-      else
-        next
+
+    if check_handle_exists(params[:recipient_handle])
+      @user_repo = UserRepository.new
+      recipient_id = @user_repo.find_id(params[:recipient_handle])
+
+      blocked_users = @user_repo.find_blocked(recipient_id.to_i)
+
+
+      blocked_users.each do |user|
+        if user.handle == session[:handle]
+          @blocked = true
+        else
+          next
+        end
       end
     end
 
     if @blocked
       flash[:blocked] = "You are blocked by this user, message can't be sent"
       redirect '/send_message'
-    else
+    elsif check_handle_exists(params[:recipient_handle])
       new_dm = DM.new
       new_dm.recipient_handle = params[:recipient_handle]
       new_dm.contents = params[:contents]
@@ -78,6 +82,9 @@ class Application < Sinatra::Base
       @dm_repo = DMRepository.new
       @dm_repo.add(new_dm)
       flash[:message_sent] = "Message sent"
+      redirect '/send_message'
+    else
+      flash[:invalid_handle] = "Handle Does Not Exist"
       redirect '/send_message'
     end
   end
